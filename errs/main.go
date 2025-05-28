@@ -25,38 +25,70 @@ func RequesterIdRequired() error {
 	return errors.New(requesterIdRequiredError)
 }
 
+func IsRequesterIdRequired(err error) bool {
+	return strings.Contains(err.Error(), requesterIdRequiredError)
+}
+
 func CreateError(entity string, err error) error {
 	return status.Errorf(codes.Internal, "%s: %v", createError, err)
+}
+
+func IsCreateError(err error) bool {
+	return strings.Contains(err.Error(), createError)
 }
 
 func SavingError(entity string, err error) error {
 	return status.Errorf(codes.Internal, "%s: %v", saveError, err)
 }
 
-func IsRequesterIdRequired(err error) bool {
-	return strings.Contains(err.Error(), requesterIdRequiredError)
+func IsSavingError(err error) bool {
+	return strings.Contains(err.Error(), saveError)
 }
 
 func DeleteError(entity string, err error) error {
 	return status.Errorf(codes.Internal, "%s: %v", deleteError, err)
 }
 
-func CommitError(err error) error {
+func IsDeleteError(err error) bool {
+	return strings.Contains(err.Error(), deleteError)
+}
+
+func CommitTransactionError(err error) error {
 	return status.Error(codes.Internal, fmt.Sprintf("%s: %v", commitTransactionError, err))
 }
 
-func StartError(err error) error {
+func IsCommitTransactionError(err error) bool {
+	return strings.Contains(err.Error(), commitTransactionError)
+}
+
+func StartTransactionError(err error) error {
 	return status.Error(codes.Internal, fmt.Sprintf("%s: %v", startTransactionError, err))
+}
+
+func IsStartTransactionError(err error) bool {
+	return strings.Contains(err.Error(), startTransactionError)
 }
 
 func ListingError(entity string, err error) error {
 	return status.Error(codes.Internal, fmt.Sprintf("%s: %v", listingError, err))
 }
 
+func IsListingError(err error) bool {
+	return strings.Contains(err.Error(), listingError)
+}
+
 func InvalidForeignKey(err error) error {
 	return status.Error(codes.InvalidArgument, fmt.Sprintf("%s: %v", invalidForeignKeyError, err))
 }
 
+func IsInvalidForeignKey(err error) bool {
+	return strings.Contains(err.Error(), invalidForeignKeyError)
+}
+
 func InvalidOrderByValue(err error) error {
 	return status.Error(codes.InvalidArgument, fmt.Sprintf("%s: %v", invalidOrderByValue, err))
+}
+
+func IsInvalidOrderByValue(err error) bool {
+	return strings.Contains(err.Error(), invalidOrderByValue)
 }
