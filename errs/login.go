@@ -7,7 +7,10 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-const userNotFoundInLoginError = "user not found"
+const (
+	userNotFoundInLoginError = "user not found"
+	wrongPasswordError       = "wrong password"
+)
 
 func UserNotFoundInLogin() error {
 	return status.Error(codes.NotFound, userNotFoundInLoginError)
@@ -15,4 +18,12 @@ func UserNotFoundInLogin() error {
 
 func IsUserNotFoundInLogin(err error) bool {
 	return strings.Contains(err.Error(), userNotFoundInLoginError)
+}
+
+func WrongPassword() error {
+	return status.Error(codes.Unauthenticated, wrongPasswordError)
+}
+
+func IsWrongPassword(err error) bool {
+	return strings.Contains(err.Error(), wrongPasswordError)
 }
