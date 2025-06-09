@@ -9,7 +9,7 @@ import (
 
 const userNotFoundInLoginError = "user not found"
 
-func UserNotFoundInLogin(id int) error {
+func UserNotFoundInLogin() error {
 	return status.Error(codes.NotFound, userNotFoundInLoginError)
 }
 
