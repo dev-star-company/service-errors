@@ -92,3 +92,11 @@ func InvalidOrderByValue(err error) error {
 func IsInvalidOrderByValue(err error) bool {
 	return strings.Contains(err.Error(), invalidOrderByValue)
 }
+
+func BadRequest(err error) error {
+	return status.Error(codes.InvalidArgument, fmt.Sprintf("bad request: %v", err))
+}
+
+func IsBadRequest(err error) bool {
+	return strings.Contains(err.Error(), "bad request")
+}
