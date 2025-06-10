@@ -10,6 +10,7 @@ import (
 const (
 	invalidToken   = "invalid token"
 	malformedToken = "malformed token validation"
+	expiredToken   = "expired token"
 )
 
 func InvalidToken() error {
@@ -26,4 +27,12 @@ func MalformedToken() error {
 
 func IsMalformedToken(err error) bool {
 	return strings.Contains(err.Error(), malformedToken)
+}
+
+func ExpiredToken() error {
+	return status.Error(codes.Unauthenticated, expiredToken)
+}
+
+func IsExpiredToken(err error) bool {
+	return strings.Contains(err.Error(), expiredToken)
 }
