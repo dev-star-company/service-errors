@@ -20,7 +20,16 @@ const (
 	createError              = "error creating"
 	invalidOrderByValue      = "invalid order by value"
 	badRequestError          = "bad request"
+	unknownError             = "unknown error occurred"
 )
+
+func UnknownError(err error) error {
+	return status.Errorf(codes.Unknown, "%s: %v", unknownError, err)
+}
+
+func IsUnknownError(err error) bool {
+	return strings.Contains(err.Error(), unknownError) || status.Code(err) == codes.Unknown
+}
 
 func RequesterIdRequired() error {
 	return errors.New(requesterIdRequiredError)
