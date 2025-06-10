@@ -13,10 +13,10 @@ const (
 	expiredToken   = "expired token"
 )
 
-func InvalidToken(details string) error {
+func InvalidToken(details ...string) error {
 	msg := invalidToken
-	if details != "" {
-		msg += ": " + details
+	if len(details) > 0 && details[0] != "" {
+		msg += ": " + details[0]
 	}
 	return status.Error(codes.Unauthenticated, msg)
 }
@@ -25,10 +25,10 @@ func IsInvalidToken(err error) bool {
 	return strings.Contains(err.Error(), invalidToken)
 }
 
-func MalformedToken(details string) error {
+func MalformedToken(details ...string) error {
 	msg := malformedToken
-	if details != "" {
-		msg += ": " + details
+	if len(details) > 0 && details[0] != "" {
+		msg += ": " + details[0]
 	}
 	return status.Error(codes.Unauthenticated, msg)
 }
