@@ -19,6 +19,7 @@ const (
 	saveError                = "error saving"
 	createError              = "error creating"
 	invalidOrderByValue      = "invalid order by value"
+	badRequestError          = "bad request"
 )
 
 func RequesterIdRequired() error {
@@ -94,9 +95,9 @@ func IsInvalidOrderByValue(err error) bool {
 }
 
 func BadRequest(err error) error {
-	return status.Error(codes.InvalidArgument, fmt.Sprintf("bad request: %v", err))
+	return status.Error(codes.InvalidArgument, fmt.Sprintf("%s: %v", badRequestError, err))
 }
 
 func IsBadRequest(err error) bool {
-	return strings.Contains(err.Error(), "bad request")
+	return strings.Contains(err.Error(), badRequestError)
 }
