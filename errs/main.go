@@ -21,6 +21,7 @@ const (
 	invalidOrderByValue      = "invalid order by value"
 	badRequestError          = "bad request"
 	unknownError             = "unknown error occurred"
+	internalErrorMessage     = "internal error occurred"
 )
 
 func UnknownError(err error) error {
@@ -109,4 +110,12 @@ func BadRequest(err error) error {
 
 func IsBadRequest(err error) bool {
 	return strings.Contains(err.Error(), badRequestError)
+}
+
+func InternalError(err error) error {
+	return status.Error(codes.Internal, fmt.Sprintf("%s: %v", internalErrorMessage, err))
+}
+
+func IsInternalError(err error) bool {
+	return strings.Contains(err.Error(), internalErrorMessage) || status.Code(err) == codes.Internal
 }
