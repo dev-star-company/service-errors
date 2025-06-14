@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	requesterIdRequiredError = "requester id is required"
+	RequesterIDRequiredError = "requester id is required"
 	invalidForeignKeyError   = "invalid foreign key"
 	listingError             = "error listing"
 	startTransactionError    = "starting transaction"
@@ -32,12 +32,12 @@ func IsUnknownError(err error) bool {
 	return strings.Contains(err.Error(), unknownError) || status.Code(err) == codes.Unknown
 }
 
-func RequesterIdRequired() error {
-	return errors.New(requesterIdRequiredError)
+func RequesterIDRequired() error {
+	return errors.New(RequesterIDRequiredError)
 }
 
-func IsRequesterIdRequired(err error) bool {
-	return strings.Contains(err.Error(), requesterIdRequiredError)
+func IsRequesterIDRequired(err error) bool {
+	return strings.Contains(err.Error(), RequesterIDRequiredError)
 }
 
 func CreateError(entity string, err error) error {
