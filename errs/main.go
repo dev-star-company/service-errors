@@ -22,10 +22,15 @@ const (
 	badRequestError          = "bad request"
 	unknownError             = "unknown error occurred"
 	internalErrorMessage     = "internal error occurred"
+	invalidArgument          = "orderby must be 'asc' or 'desc"
 )
 
 func UnknownError(err error) error {
 	return status.Errorf(codes.Unknown, "%s: %v", unknownError, err)
+}
+
+func InvalidArgument(err error) error {
+	return status.Errorf(codes.Unknown, "%s: %v", invalidArgument, err)
 }
 
 func IsUnknownError(err error) bool {
